@@ -10,11 +10,16 @@ namespace OOP_Lessons
             Console.WriteLine("Lesson2");
             Console.Write("Запусть дамашне задание №");
             string lesson= Console.ReadLine();
+            
+
+            
 
             switch (lesson)
             {
                 case "2":
+                    Log.Logs("Выбран Lesson2");
                     Console.WriteLine("Выбран Lesson2");
+                    Banks.Bank();
 
                     break;
             }
