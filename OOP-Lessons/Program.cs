@@ -22,6 +22,8 @@ namespace OOP_Lessons
                     Banks.Bank();
 
                     break;
+
+                    Console.WriteLine("the end");
             }
 
         }

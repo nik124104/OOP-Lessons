@@ -63,6 +63,14 @@ namespace OOP_Lessons.leson1_Bank
             }
         }
 
+        public CheckTipe tipe
+        {
+            get
+            {
+                return _tipe;
+            }
+
+        }
 
     }
 }
