@@ -28,7 +28,7 @@ namespace OOP_Lessons.leson1_Bank
 
             _balance = 0;
 
-            _tipe = 0; //Почемуто 0 можно, а int уже нельзя //_tipe = (CheckTipe)tipe;
+            _tipe = (CheckTipe)1; //Почемуто 0 можно, а int уже нельзя //_tipe = (CheckTipe)tipe;
         }
 
         public Check(int idcheck, double balanse, int tipe)
