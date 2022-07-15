@@ -15,16 +15,17 @@ namespace OOP_Lessons
         {
             int n = 0;
 
-            double money;
+            
 
 
             var checks = new List<Check>();
             var check = new Check();
             checks.Add(check);
 
-            Console.WriteLine("Меню Банка:\n 1)Создать счет\n 2)Пополнить счет\n 3)Списать средства\n 4)Просмотр баланса:\n 5)Выйти \nВыберете пункт меню:");
+            
             do
             {
+                Console.WriteLine("Меню Банка:\n 1)Создать счет\n 2)Пополнить счет\n 3)Списать средства\n 4)Просмотр баланса:\n 5)Выйти \nВыберете пункт меню:");
                 int.TryParse(Console.ReadLine(), out n);
 
                 switch (n)
@@ -49,45 +50,55 @@ namespace OOP_Lessons
                                 if (double.TryParse(Console.ReadLine(), out money) & money >= 0)
                                 {
                                     Log.Logs($"Принято money={money}");
+                                                                       
                                 }
                                 else
                                 {
                                     Console.WriteLine("Введите коректную сумму больше 0");
                                     money = -1;
                                 }
-                                Console.Write("Введите тип счета 1)Classic, 2)salary, 3)credit ");
-                                //int tipe = Convert.ToInt32(Console.ReadLine());
+                            } while (money < 0 & money==-1);
 
+                            do
+                            {
+                                Console.WriteLine("Введите тип счета 1)Classic, 2)salary, 3)credit ");
                                 if (int.TryParse(Console.ReadLine(), out tipe) & tipe > 0 & tipe < 4)
                                 {
                                     Log.Logs($"Принято Тип счета={tipe}");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Введите коректную сумму больше 0");
-                                    money = -1;
-                                }
+                                    Console.WriteLine("Введите коректно тип счета");
 
-                            } while (money > 0 & tipe > 0 & tipe < 4);
+                                }
+                                //int tipe = Convert.ToInt32(Console.ReadLine());
+                            } while (tipe <= 0 & tipe > 4);
+
+
+
+
 
 
 
                             check = new Check(1000 + newid, money, tipe);
                             checks.Add(check);
+
+                            Console.WriteLine($"Новый счет создан: № {check.idcheck}; Баланс {check.balanse}; Тип{check.tipe}");
                         }
                         break;
                     case 2:
 
                         Console.WriteLine("Пополнение счета");
-                        Console.Write("Введите номер счета");
+                        
 
                         {
                             int idcheck;
+                            double money = -1;
 
                             idcheck = ID();
                             var id1 = checks.FirstOrDefault(u => u.idcheck == idcheck);
 
-                            if (id1.idcheck == idcheck)///Не забыть посмотреть
+                            if (id1 != null)///Не забыть посмотреть
                             {
                                 Console.Write("Введите сумму пополнения + ");
 
@@ -118,21 +129,27 @@ namespace OOP_Lessons
                         break;
                     case 3:
                         {
+                            double money = -1;
                             int idcheck;
                             Console.WriteLine("Списание средств");
                             idcheck = ID();
                             var id2 = checks.FirstOrDefault(u => u.idcheck == idcheck);
 
 
-                            if (id2.idcheck == idcheck) ///Не забыть посмотреть!!!
+                            if (id2 != null) ///Не забыть посмотреть!!!
                             {
-                                Console.Write("Введите сумму пополнения - ");
+                              
+                                Console.Write("Введите сумму списания - ");
 
                                 money = MOney();
 
-                                if (money > 0)
+                                if (money < id2.balanse)
                                 {
                                     id2.balanse -= money;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Не достаточно средств");
                                 }
                             }
                             else
@@ -150,7 +167,7 @@ namespace OOP_Lessons
                             idcheck = ID();
                             var id3 = checks.FirstOrDefault(u => u.idcheck == idcheck);
 
-                            if(id3.idcheck == idcheck)
+                            if(id3 !=null)
                             {
                                 Console.WriteLine(id3.balanse);
                             }
@@ -169,7 +186,7 @@ namespace OOP_Lessons
                         break;
 
                 }
-            } while (n == 5);
+            } while (n != 5);
 
         }
 
@@ -177,6 +194,7 @@ namespace OOP_Lessons
         {
             bool flag = true;
             int idcheck;
+            Console.Write("Введите номер счета");
             do
             {
 
@@ -189,7 +207,7 @@ namespace OOP_Lessons
                     Console.WriteLine("Введите коректно номер счета в формате ХХХХ");
                     flag = false;
                 }
-            } while (flag == true);
+            } while (flag != true);
 
             return idcheck;
         }
@@ -265,6 +283,6 @@ namespace OOP_Lessons
         }
         
 
-        }
+        
     }
 }
